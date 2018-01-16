@@ -11,7 +11,7 @@ class Text extends FieldType {
 	public static function render( Field $field ) {
 		parent::render( $field );
 		$params      = $field->args;
-		$value       = esc_attr( self::$instance->get_value( $field->page->name, $field->name ) );
+		$value       = esc_attr( self::get_value( $field ) );
 		$size        = isset( $params['size'] ) && null !== $params['size'] ? $params['size'] : 'regular';
 		$placeholder = empty( $params['placeholder'] ) ? '' : ' placeholder="' . $params['placeholder'] . '"';
 

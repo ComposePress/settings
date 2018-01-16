@@ -10,12 +10,6 @@ abstract class FieldType extends Component {
 
 	const NAME = '';
 
-	protected static $instance;
-
-	public function __construct() {
-		self::$instance = $this;
-	}
-
 	/**
 	 * @param string $page
 	 * @param array  $params
@@ -66,7 +60,7 @@ abstract class FieldType extends Component {
 		add_action( $this->plugin->safe_slug . '_admin_ui_enqueue_field_js', [ __CLASS__, 'enqueue_scripts' ] );
 	}
 
-	protected function get_value( $page, $name ) {
-		return Registry::get_page( $this->plugin->safe_slug, $page, $name );
+	protected static function get_value( Field $field ) {
+		return Registry::get_page( $field->plugin->safe_slug, $field->page->name, $field->name );
 	}
 }
