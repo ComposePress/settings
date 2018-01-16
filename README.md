@@ -1,2 +1,2 @@
-# composepress-settings
+# ComposePress Settings
 A WordPress settings library for the composepress framework
