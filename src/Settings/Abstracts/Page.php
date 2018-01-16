@@ -140,6 +140,7 @@ abstract class Page extends Component {
 		wp_add_inline_script( 'jquery-core',
 			'(function ($) {
 	$(function () {
+		var unsaved = false;
 		//Initiate Color Picker
 		$(\'.wp-color-picker-field\').wpColorPicker();
 
@@ -193,6 +194,9 @@ abstract class Page extends Component {
 								$.post("' . admin_url( 'admin-post.php' ) . '", data, null, "json")
 								.done(function(response){
 									$(".notifications").html(response.notifications).children().hide();
+									if(0 < $(".notifications .updated").length) {
+										unsaved = false;
+									}
 								}).fail(function(){
 									$(".notifications").html("' . str_replace( "\n", '', trim( $settings_failure_notification ) ) . '").children().hide();
 								}).then(function(){
@@ -200,8 +204,17 @@ abstract class Page extends Component {
 									$(document).trigger("wp-updates-notice-added");
 								});
 							});
-						});
-				})(jQuery);' );
+			$("form").on("change", "input, textarea, select", function(){
+				unsaved = true;
+			})
+			$( window ).on("beforeunload",function() {
+				if(!unsaved){
+					return;
+				}
+  				return "' . __( 'You have unsaved changes on this page. Are you sure you want to leave without saving?', $this->plugin->safe_slug ) . '";
+			});
+		});
+})(jQuery);' );
 	}
 
 	/**
