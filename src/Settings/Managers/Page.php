@@ -3,7 +3,7 @@
 namespace ComposePress\Settings\Managers;
 
 
-use ComposePress\Settings\Abstracts\Manager;
+use ComposePress\Core\Abstracts\Manager;
 
 class Page extends Manager {
 
