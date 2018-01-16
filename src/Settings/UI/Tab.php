@@ -4,7 +4,7 @@
 namespace ComposePress\Settings\UI;
 
 
-use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 
 /**
  * Class Tab

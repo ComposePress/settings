@@ -4,17 +4,17 @@
 namespace ComposePress\Settings\UI;
 
 
-use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 
 /**
  * Class Section
  *
  * @package ComposePress\Settings\UI
- * @property  string                                     $id
- * @property  string                                     $title
- * @property  callable                                   $callback
+ * @property  string                                $id
+ * @property  string                                $title
+ * @property  callable                              $callback
  * @property  \ComposePress\Settings\Abstracts\Page $parent
- * @property bool                                        tab
+ * @property bool                                   tab
  */
 class Section extends Component {
 	/**
@@ -44,7 +44,7 @@ class Section extends Component {
 	 *
 	 * @param string                                 $id
 	 * @param string                                 $title
-	 * @param \ComposePress\Settings\Abstracts\Component $parent
+	 * @param \ComposePress\Core\Abstracts\Component $parent
 	 * @param string                                 $description
 	 * @param callable                               $callback
 	 */

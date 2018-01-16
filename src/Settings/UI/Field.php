@@ -3,7 +3,7 @@
 
 namespace ComposePress\Settings\UI;
 
-use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 use ComposePress\Settings\Abstracts\Page;
 
 
@@ -12,10 +12,10 @@ use ComposePress\Settings\Abstracts\Page;
  *
  * @package ComposePress\Settings\UI
  * @property \ComposePress\Settings\UI\Field   $fields
- * @property string                                 $name
- * @property string                                 $title
- * @property string                                 $type
- * @property array                                  $args
+ * @property string                            $name
+ * @property string                            $title
+ * @property string                            $type
+ * @property array                             $args
  * @property \ComposePress\Settings\UI\Section $parent
  */
 class Field extends Component {
@@ -45,11 +45,11 @@ class Field extends Component {
 	/**
 	 * Section constructor.
 	 *
-	 * @param  string                                  $name
-	 * @param  string                                  $title
-	 * @param  string                                  $type
+	 * @param  string                             $name
+	 * @param  string                             $title
+	 * @param  string                             $type
 	 * @param   \ComposePress\Settings\UI\Section $section
-	 * @param array                                    $args
+	 * @param array                               $args
 	 */
 	public function __construct( $name, $title, $type, $section, $args = [] ) {
 

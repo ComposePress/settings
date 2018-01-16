@@ -2,7 +2,7 @@
 
 namespace ComposePress\Settings\Abstracts;
 
-use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 use ComposePress\Settings\Registry;
 use ComposePress\Settings\UI\Field;
 
@@ -26,8 +26,8 @@ abstract class FieldType extends Component {
 	}
 
 	/**
-	 * @param string                                     $option_value
-	 * @param string                                     $option_slug
+	 * @param string                                $option_value
+	 * @param string                                $option_slug
 	 * @param \ComposePress\Settings\Abstracts\Page $page
 	 *
 	 * @return mixed
@@ -45,6 +45,10 @@ abstract class FieldType extends Component {
 		return $desc;
 	}
 
+	protected static function get_value( Field $field ) {
+		return Registry::get_page( $field->plugin->safe_slug, $field->page->name, $field->name );
+	}
+
 	/**
 	 *
 	 */
@@ -58,9 +62,5 @@ abstract class FieldType extends Component {
 			'sanitize',
 		], 10, 3 );
 		add_action( $this->plugin->safe_slug . '_admin_ui_enqueue_field_js', [ __CLASS__, 'enqueue_scripts' ] );
-	}
-
-	protected static function get_value( Field $field ) {
-		return Registry::get_page( $field->plugin->safe_slug, $field->page->name, $field->name );
 	}
 }

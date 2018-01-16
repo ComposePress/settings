@@ -4,30 +4,30 @@
 namespace ComposePress\Settings\UI;
 
 
-use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 use ComposePress\Settings\Abstracts\Page;
 
 class Factory {
 
 	/**
-	 * @var \ComposePress\Settings\Abstracts\Plugin
+	 * @var \ComposePress\Core\Abstracts\Plugin
 	 */
 	private static $plugin;
 
 	/**
-	 * @param \ComposePress\Settings\Abstracts\Plugin $plugin
+	 * @param \ComposePress\Core\Abstracts\Plugin $plugin
 	 */
 	public static function init( $plugin ) {
 		self::$plugin = $plugin;
 	}
 
 	/**
-	 * @param string                                     $id
-	 * @param string                                     $title
+	 * @param string                                $id
+	 * @param string                                $title
 	 * @param \ComposePress\Settings\Abstracts\Page $page
-	 * @param null                                       $description
-	 * @param bool                                       $tab
-	 * @param mixed                                      $callback
+	 * @param null                                  $description
+	 * @param bool                                  $tab
+	 * @param mixed                                 $callback
 	 *
 	 * @return mixed
 	 */
@@ -54,8 +54,8 @@ class Factory {
 	}
 
 	/**
-	 * @param string                                     $id
-	 * @param string                                     $title
+	 * @param string                                $id
+	 * @param string                                $title
 	 * @param \ComposePress\Settings\Abstracts\Page $page
 	 *
 	 * @return \ComposePress\Settings\UI\Tab
@@ -74,9 +74,9 @@ class Factory {
 	}
 
 	/**
-	 * @param string                                 $name
-	 * @param string                                 $title
-	 * @param string                                 $type
+	 * @param string                            $name
+	 * @param string                            $title
+	 * @param string                            $type
 	 * @param \ComposePress\Settings\UI\Section $section
 	 *
 	 * @return mixed

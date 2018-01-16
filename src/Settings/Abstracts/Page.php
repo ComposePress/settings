@@ -2,7 +2,7 @@
 
 namespace ComposePress\Settings\Abstracts;
 
-use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 use ComposePress\Settings\UI\Section;
 use ComposePress\Settings\UI\Tab;
 

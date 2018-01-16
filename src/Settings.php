@@ -4,8 +4,7 @@
 namespace ComposePress\Settings;
 
 
-use ComposePress\Settings\Abstracts\Component;
-use ComposePress\Settings\Settings\Registry;
+use ComposePress\Core\Abstracts\Component;
 
 /**
  * Class Settings
@@ -13,7 +12,6 @@ use ComposePress\Settings\Settings\Registry;
  * @package ComposePress\Settings
  */
 class Settings extends Component {
-
 
 	/**
 	 *

@@ -2,7 +2,6 @@
 
 namespace ComposePress\Settings\Abstracts;
 
-use ComposePress\Settings\Abstracts\Component;
 use ComposePress\Settings\Managers\Field;
 use ComposePress\Settings\Managers\Page;
 use ComposePress\Settings\Registry;
