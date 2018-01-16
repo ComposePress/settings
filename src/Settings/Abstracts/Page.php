@@ -191,6 +191,19 @@ abstract class Page extends Component {
 			data[ "_wpnonce" ] = ' . wp_json_encode( wp_create_nonce( $this->plugin->slug . '_save-settings' ) ) . ';
 								data["action"] = ' . wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) . ';
 								data["page"] = $(this).data("page");
+								$(".notifications").html($("<div />", {
+									class:"notice notice-info",
+								}).append($("<i />", {
+									class: "spinner is-active",
+									}).css({
+											float: "none",
+											width: "auto",
+											height: "auto",
+											padding: "10px 0 10px 50px",
+											backgroundPosition: "20px 0;"
+										})
+									).append("' . __( 'Saving...', $this->plugin->safe_slug ) . '")
+								);
 								$.post("' . admin_url( 'admin-post.php' ) . '", data, null, "json")
 								.done(function(response){
 									$(".notifications").html(response.notifications).children().hide();
