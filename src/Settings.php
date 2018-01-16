@@ -1,16 +1,16 @@
 <?php
 
 
-namespace ComposePress\Core;
+namespace ComposePress\Settings;
 
 
-use ComposePress\Core\Abstracts\Component;
-use ComposePress\Core\Settings\Registry;
+use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Settings\Settings\Registry;
 
 /**
  * Class Settings
  *
- * @package ComposePress\Core
+ * @package ComposePress\Settings
  */
 class Settings extends Component {
 

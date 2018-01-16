@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ComposePress\Core\Settings;
+namespace ComposePress\Settings;
 
 
 class Registry {

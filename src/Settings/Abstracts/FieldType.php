@@ -1,10 +1,10 @@
 <?php
 
-namespace ComposePress\Core\Settings\Abstracts;
+namespace ComposePress\Settings\Abstracts;
 
-use ComposePress\Core\Abstracts\Component;
-use ComposePress\Core\Settings\Registry;
-use ComposePress\Core\Settings\UI\Field;
+use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Settings\Registry;
+use ComposePress\Settings\UI\Field;
 
 abstract class FieldType extends Component {
 
@@ -28,7 +28,7 @@ abstract class FieldType extends Component {
 	/**
 	 * @param string                                     $option_value
 	 * @param string                                     $option_slug
-	 * @param \ComposePress\Core\Settings\Abstracts\Page $page
+	 * @param \ComposePress\Settings\Abstracts\Page $page
 	 *
 	 * @return mixed
 	 */

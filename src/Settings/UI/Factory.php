@@ -1,21 +1,21 @@
 <?php
 
 
-namespace ComposePress\Core\Settings\UI;
+namespace ComposePress\Settings\UI;
 
 
-use ComposePress\Core\Abstracts\Component;
-use ComposePress\Core\Settings\Abstracts\Page;
+use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Settings\Abstracts\Page;
 
 class Factory {
 
 	/**
-	 * @var \ComposePress\Core\Abstracts\Plugin
+	 * @var \ComposePress\Settings\Abstracts\Plugin
 	 */
 	private static $plugin;
 
 	/**
-	 * @param \ComposePress\Core\Abstracts\Plugin $plugin
+	 * @param \ComposePress\Settings\Abstracts\Plugin $plugin
 	 */
 	public static function init( $plugin ) {
 		self::$plugin = $plugin;
@@ -24,7 +24,7 @@ class Factory {
 	/**
 	 * @param string                                     $id
 	 * @param string                                     $title
-	 * @param \ComposePress\Core\Settings\Abstracts\Page $page
+	 * @param \ComposePress\Settings\Abstracts\Page $page
 	 * @param null                                       $description
 	 * @param bool                                       $tab
 	 * @param mixed                                      $callback
@@ -37,8 +37,8 @@ class Factory {
 			throw new \Exception( sprintf( __( '% requires either a valid Page or Tab to connect to', self::$plugin->safe_slug ), __METHOD__ ) );
 		}
 
-		/** @var \ComposePress\Core\Settings\UI\Section $section */
-		$section = self::$plugin->container->create( '\ComposePress\Core\Settings\UI\Section', [
+		/** @var \ComposePress\Settings\UI\Section $section */
+		$section = self::$plugin->container->create( '\ComposePress\Settings\UI\Section', [
 			$id,
 			$title,
 			$parent,
@@ -56,13 +56,13 @@ class Factory {
 	/**
 	 * @param string                                     $id
 	 * @param string                                     $title
-	 * @param \ComposePress\Core\Settings\Abstracts\Page $page
+	 * @param \ComposePress\Settings\Abstracts\Page $page
 	 *
-	 * @return \ComposePress\Core\Settings\UI\Tab
+	 * @return \ComposePress\Settings\UI\Tab
 	 */
 	public static function tab( $id, $title, Page $page ) {
-		/** @var \ComposePress\Core\Settings\UI\Tab $tab */
-		$tab         = self::$plugin->container->create( '\ComposePress\Core\Settings\UI\Tab', [
+		/** @var \ComposePress\Settings\UI\Tab $tab */
+		$tab         = self::$plugin->container->create( '\ComposePress\Settings\UI\Tab', [
 			$id,
 			$title,
 		] );
@@ -77,13 +77,13 @@ class Factory {
 	 * @param string                                 $name
 	 * @param string                                 $title
 	 * @param string                                 $type
-	 * @param \ComposePress\Core\Settings\UI\Section $section
+	 * @param \ComposePress\Settings\UI\Section $section
 	 *
 	 * @return mixed
 	 */
 	public static function field( $name, $title, $type, Section $section, $args = [] ) {
-		/** @var \ComposePress\Core\Settings\UI\Field $field */
-		$field         = self::$plugin->container->create( '\ComposePress\Core\Settings\UI\Field', [
+		/** @var \ComposePress\Settings\UI\Field $field */
+		$field         = self::$plugin->container->create( '\ComposePress\Settings\UI\Field', [
 			$name,
 			$title,
 			$type,

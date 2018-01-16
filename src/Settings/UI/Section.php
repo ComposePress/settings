@@ -1,19 +1,19 @@
 <?php
 
 
-namespace ComposePress\Core\Settings\UI;
+namespace ComposePress\Settings\UI;
 
 
-use ComposePress\Core\Abstracts\Component;
+use ComposePress\Settings\Abstracts\Component;
 
 /**
  * Class Section
  *
- * @package ComposePress\Core\Settings\UI
+ * @package ComposePress\Settings\UI
  * @property  string                                     $id
  * @property  string                                     $title
  * @property  callable                                   $callback
- * @property  \ComposePress\Core\Settings\Abstracts\Page $parent
+ * @property  \ComposePress\Settings\Abstracts\Page $parent
  * @property bool                                        tab
  */
 class Section extends Component {
@@ -31,7 +31,7 @@ class Section extends Component {
 	protected $callback;
 
 	/**
-	 * @var \ComposePress\Core\Settings\UI\Field[]
+	 * @var \ComposePress\Settings\UI\Field[]
 	 */
 	protected $fields = [];
 	/**
@@ -44,7 +44,7 @@ class Section extends Component {
 	 *
 	 * @param string                                 $id
 	 * @param string                                 $title
-	 * @param \ComposePress\Core\Abstracts\Component $parent
+	 * @param \ComposePress\Settings\Abstracts\Component $parent
 	 * @param string                                 $description
 	 * @param callable                               $callback
 	 */
@@ -156,7 +156,7 @@ class Section extends Component {
 	}
 
 	/**
-	 * @return \ComposePress\Core\Settings\UI\Field[]
+	 * @return \ComposePress\Settings\UI\Field[]
 	 */
 	public function get_fields() {
 		return $this->fields;

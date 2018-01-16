@@ -1,9 +1,9 @@
 <?php
 
-namespace ComposePress\Core\Settings\Managers;
+namespace ComposePress\Settings\Managers;
 
 
-use ComposePress\Core\Abstracts\Manager;
+use ComposePress\Settings\Abstracts\Manager;
 
 class Page extends Manager {
 

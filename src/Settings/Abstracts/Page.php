@@ -1,15 +1,15 @@
 <?php
 
-namespace ComposePress\Core\Settings\Abstracts;
+namespace ComposePress\Settings\Abstracts;
 
-use ComposePress\Core\Abstracts\Component;
-use ComposePress\Core\Settings\UI\Section;
-use ComposePress\Core\Settings\UI\Tab;
+use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Settings\UI\Section;
+use ComposePress\Settings\UI\Tab;
 
 /**
  * Class Page
  *
- * @package ComposePress\Core\Settings\Abstracts
+ * @package ComposePress\Settings\Abstracts
  * @property string    $name
  * @property string    $full_name
  * @property string    $title
@@ -34,12 +34,12 @@ abstract class Page extends Component {
 	 */
 	const NETWORK_CAPABILITY = '';
 	/**
-	 * @var \ComposePress\Core\Settings\UI\Section[]
+	 * @var \ComposePress\Settings\UI\Section[]
 	 */
 	protected $sections = [];
 
 	/**
-	 * @var \ComposePress\Core\Settings\UI\Tab[]
+	 * @var \ComposePress\Settings\UI\Tab[]
 	 */
 	protected $tabs = [];
 
@@ -49,7 +49,7 @@ abstract class Page extends Component {
 	protected $default = false;
 
 	/**
-	 * @return \ComposePress\Core\Settings\UI\Section[]
+	 * @return \ComposePress\Settings\UI\Section[]
 	 */
 	public function get_sections() {
 		return $this->sections;
@@ -302,14 +302,14 @@ abstract class Page extends Component {
 	}
 
 	/**
-	 * @param \ComposePress\Core\Settings\UI\Section $section
+	 * @param \ComposePress\Settings\UI\Section $section
 	 */
 	public function add_section( Section $section ) {
 		$this->sections[] = $section;
 	}
 
 	/**
-	 * @param \ComposePress\Core\Settings\UI\Tab $tab
+	 * @param \ComposePress\Settings\UI\Tab $tab
 	 */
 	public function add_tab( Tab $tab ) {
 		$this->tabs[] = $tab;
@@ -330,7 +330,7 @@ abstract class Page extends Component {
 	}
 
 	/**
-	 * @return \ComposePress\Core\Settings\UI\Tab[]
+	 * @return \ComposePress\Settings\UI\Tab[]
 	 */
 	public function get_tabs() {
 		return $this->tabs;

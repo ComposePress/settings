@@ -1,22 +1,22 @@
 <?php
 
 
-namespace ComposePress\Core\Settings\UI;
+namespace ComposePress\Settings\UI;
 
-use ComposePress\Core\Abstracts\Component;
-use ComposePress\Core\Settings\Abstracts\Page;
+use ComposePress\Settings\Abstracts\Component;
+use ComposePress\Settings\Abstracts\Page;
 
 
 /**
  * Class Field
  *
- * @package ComposePress\Core\Settings\UI
- * @property \ComposePress\Core\Settings\UI\Field   $fields
+ * @package ComposePress\Settings\UI
+ * @property \ComposePress\Settings\UI\Field   $fields
  * @property string                                 $name
  * @property string                                 $title
  * @property string                                 $type
  * @property array                                  $args
- * @property \ComposePress\Core\Settings\UI\Section $parent
+ * @property \ComposePress\Settings\UI\Section $parent
  */
 class Field extends Component {
 	/**
@@ -48,7 +48,7 @@ class Field extends Component {
 	 * @param  string                                  $name
 	 * @param  string                                  $title
 	 * @param  string                                  $type
-	 * @param   \ComposePress\Core\Settings\UI\Section $section
+	 * @param   \ComposePress\Settings\UI\Section $section
 	 * @param array                                    $args
 	 */
 	public function __construct( $name, $title, $type, $section, $args = [] ) {

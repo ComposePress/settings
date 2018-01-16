@@ -1,16 +1,16 @@
 <?php
 
 
-namespace ComposePress\Core\Settings\UI;
+namespace ComposePress\Settings\UI;
 
 
-use ComposePress\Core\Abstracts\Component;
+use ComposePress\Settings\Abstracts\Component;
 
 /**
  * Class Tab
  *
- * @package ComposePress\Core\Settings\UI
- * @property \ComposePress\Core\Settings\UI\Section[] $sections
+ * @package ComposePress\Settings\UI
+ * @property \ComposePress\Settings\UI\Section[] $sections
  */
 class Tab extends Component {
 	/**
@@ -53,7 +53,7 @@ class Tab extends Component {
 	}
 
 	/**
-	 * @param \ComposePress\Core\Settings\UI\Section $section
+	 * @param \ComposePress\Settings\UI\Section $section
 	 */
 	public function add_section( Section $section ) {
 		$this->sections[] = $section;

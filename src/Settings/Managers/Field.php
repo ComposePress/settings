@@ -1,10 +1,10 @@
 <?php
 
-namespace ComposePress\Core\Settings\Managers;
+namespace ComposePress\Settings\Managers;
 
-use ComposePress\Core\Abstracts\Manager;
+use ComposePress\Settings\Abstracts\Manager;
 
 class Field extends Manager {
-	const MODULE_NAMESPACE = '\ComposePress\Core\Settings\UI\Fields';
+	const MODULE_NAMESPACE = '\ComposePress\Settings\UI\Fields';
 	protected $modules = [ 'Text' ];
 }
