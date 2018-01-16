@@ -1,0 +1,19 @@
+{
+  "name": "composepress/settings",
+  "type": "library",
+  "license": "GPL3",
+  "authors": [
+    {
+      "name": "Derrick Hammer",
+      "email": "derrick@derrickhammer.com"
+    }
+  ],
+  "require": {
+    "ComposePress/core": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "ComposePress\\Settings\\": "src/"
+    }
+  }
+}
