@@ -6,6 +6,7 @@ use ComposePress\Core\Abstracts\Component;
 use ComposePress\Settings\Managers\Field;
 use ComposePress\Settings\Managers\Page;
 use ComposePress\Settings\Registry;
+use ComposePress\Settings\UI\Factory;
 
 /**
  * Class UI
@@ -221,6 +222,7 @@ abstract class UI extends Component {
 					$this,
 					'settings_ui',
 				] );
+				Factory::init( $this->plugin );
 				$page->register_settings();
 				$page->build_settings();
 
@@ -235,6 +237,7 @@ abstract class UI extends Component {
 				] );
 			}
 			$page = $this->get_current_page();
+			Factory::init( $this->plugin );
 			$page->register_settings();
 			$page->build_settings();
 		}
