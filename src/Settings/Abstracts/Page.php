@@ -3,6 +3,7 @@
 namespace ComposePress\Settings\Abstracts;
 
 use ComposePress\Core\Abstracts\Component;
+use ComposePress\Settings\UI\Factory;
 use ComposePress\Settings\UI\Section;
 use ComposePress\Settings\UI\Tab;
 
@@ -107,6 +108,7 @@ abstract class Page extends Component {
 	 *
 	 */
 	public function build_settings() {
+		Factory::init( $this->plugin );
 		foreach ( $this->sections as $section ) {
 			$section->init();
 		}

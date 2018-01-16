@@ -6,7 +6,6 @@ use ComposePress\Core\Abstracts\Component;
 use ComposePress\Settings\Managers\Field;
 use ComposePress\Settings\Managers\Page;
 use ComposePress\Settings\Registry;
-use ComposePress\Settings\UI\Factory;
 
 /**
  * Class UI
@@ -59,7 +58,6 @@ abstract class UI extends Component {
 			if ( ! $this->primary_menu && empty( $this->parent_menu ) ) {
 				throw new \Exception( sprintf( __( '%s::parent_menu must not be empty if %s::primary_menu is false' ), get_class( $this ), get_class( $this ) ) );
 			}
-			Factory::init( $this->plugin );
 			$this->setup_components();
 			$this->setup_menu();
 			$this->add_enqueue_scripts();
