@@ -1,0 +1,312 @@
+<?php
+
+namespace pcfreak30\ComposePress\Settings\Abstracts;
+
+use pcfreak30\ComposePress\Abstracts\Component;
+use pcfreak30\ComposePress\Settings\UI\Section;
+use pcfreak30\ComposePress\Settings\UI\Tab;
+
+/**
+ * Class Page
+ *
+ * @package pcfreak30\ComposePress\Settings\Abstracts
+ * @property string    $name
+ * @property string    $full_name
+ * @property string    $title
+ * @property string    $capability
+ * @property Section[] $sections
+ */
+abstract class Page extends Component {
+	/**
+	 *
+	 */
+	const NAME = '';
+	/**
+	 *
+	 */
+	const TITLE = '';
+	/**
+	 * @var string
+	 */
+	const CAPABILITY = '';
+	/**
+	 * @var string
+	 */
+	const NETWORK_CAPABILITY = '';
+	/**
+	 * @var \pcfreak30\ComposePress\Settings\UI\Section[]
+	 */
+	protected $sections = [];
+
+	/**
+	 * @var \pcfreak30\ComposePress\Settings\UI\Tab[]
+	 */
+	protected $tabs = [];
+
+	/**
+	 * @var bool
+	 */
+	protected $default = false;
+
+	/**
+	 * @return \pcfreak30\ComposePress\Settings\UI\Section[]
+	 */
+	public function get_sections() {
+		return $this->sections;
+	}
+
+	/**
+	 *
+	 */
+	public function init() {
+		add_filter( "{$this->plugin->safe_slug}_admin_ui_pages", [ $this, 'register' ] );
+	}
+
+	/**
+	 * @param $pages
+	 *
+	 * @return mixed
+	 */
+	public function register( $pages ) {
+		$pages[ $this->get_name() ] = $this;
+
+		return $pages;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_name() {
+		return static::NAME;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_capability() {
+		if ( is_network_admin() ) {
+			return static::NETWORK_CAPABILITY;
+		}
+
+		return static::CAPABILITY;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_title() {
+		return __( static::TITLE, $this->plugin->safe_slug );
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public abstract function register_settings();
+
+	/**
+	 *
+	 */
+	public function build_settings() {
+		foreach ( $this->sections as $section ) {
+			$section->init();
+		}
+		foreach ( $this->tabs as $tab ) {
+			$tab->init();
+		}
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+	}
+
+	/**
+	 *
+	 */
+	public function enqueue_scripts() {
+		if ( ! ( $this->plugin_page === $this->get_full_name() || $this->plugin_page === $this->plugin->safe_slug ) ) {
+			return false;
+		}
+		global $wp_settings_errors;
+		$old_wp_settings_errors = $wp_settings_errors;
+
+		$wp_settings_errors = [];
+		add_settings_error( $this->get_full_name(), 'settings_update_failure', __( 'There was an error in saving the settings, please try again.', $this->plugin->safe_slug ), 'updated' );
+		ob_start();
+		settings_errors( $this->get_full_name() );
+		$settings_failure_notification = ob_get_clean();
+
+		$wp_settings_errors = $old_wp_settings_errors;
+		wp_enqueue_style( 'wp-color-picker' );
+
+		wp_enqueue_media();
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_add_inline_script( 'jquery-core',
+			'(function ($) {
+	$(function () {
+		//Initiate Color Picker
+		$(\'.wp-color-picker-field\').wpColorPicker();
+
+		// Switches option sections
+		$(\'.group\').hide();
+		var activetab = window.location.hash;
+		if ((!activetab.length || !$(activetab).length) && typeof(localStorage) != \'undefined\') {
+			activetab = localStorage.getItem("' . $this->plugin_page . '_activetab");
+		}
+		if (activetab != \'\' && $(activetab).length) {
+			$(activetab).fadeIn();
+		} else {
+			$(\'.group:first\').fadeIn();
+		}
+		if (activetab != \'\' && $(activetab + \'-tab\').length) {
+			$(activetab + \'-tab\').addClass(\'nav-tab-active\');
+		}
+		else {
+			$(\'.nav-tab-wrapper a:first\').addClass(\'nav-tab-active\');
+		}
+		$(\'.nav-tab-wrapper a\').click(function (evt) {
+			$(\'.nav-tab-wrapper a\').removeClass(\'nav-tab-active\');
+			$(this).addClass(\'nav-tab-active\').blur();
+			var clicked_group = $(this).attr(\'href\');
+			if (typeof(localStorage) != \'undefined\') {
+				localStorage.setItem("' . $this->plugin_page . '_activetab", $(this).attr(\'href\'));
+			}
+			$(\'.group\').hide();
+			$(clicked_group).fadeIn();
+			if(history.pushState) {
+    			history.pushState(null, null, $(this).attr(\'href\'));
+			} else {
+    			location.hash = $(this).attr(\'href\');
+			}
+			evt.preventDefault();
+		});
+		$("#wpbody-content").prepend($("<div />", {
+			class: "notifications"
+		}));
+		$("form").submit(function (event) {
+			event.preventDefault();
+			var data = {};
+			$(\'form tr\').filter(function() {
+				return $(this).css(\'display\') !== \'none\';
+			}).find(\'input, select, textarea\').serializeArray().map(function(x) {
+				data[x.name] = x.value;
+			});
+			data[ "_wpnonce" ] = ' . wp_json_encode( wp_create_nonce( $this->plugin->slug . '_save-settings' ) ) . ';
+								data["action"] = ' . wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) . ';
+								data["page"] = $(this).data("page");
+								$.post("' . admin_url( 'admin-post.php' ) . '", data, null, "json")
+								.done(function(response){
+									$(".notifications").html(response.notifications).children().hide();
+								}).fail(function(){
+									$(".notifications").html("' . str_replace( "\n", '', trim( $settings_failure_notification ) ) . '").children().hide();
+								}).then(function(){
+									$(".notifications").children().fadeIn()
+									$(document).trigger("wp-updates-notice-added");
+								});
+							});
+						});
+				})(jQuery);' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_full_name() {
+		return $this->plugin->safe_slug . '_' . $this->get_name();
+	}
+
+	/**
+	 *
+	 */
+	public function render() {
+		if ( empty( $this->sections ) && empty( $this->tabs ) ) {
+			return false;
+		}
+		if ( 1 < count( $this->tabs ) ): ?>
+			<h2 class="nav-tab-wrapper">
+				<?php
+				foreach ( $this->tabs as $tab ):
+					?>
+					<a href="#<?php echo $tab->id ?>" class="nav-tab"
+					   id="<?php echo $tab->id ?>-tab"><?php echo $tab->title ?></a>
+				<?php
+				endforeach;
+				?>
+			</h2>
+		<?php
+		endif;
+		?>
+		<div class="metabox-holder">
+			<form data-page="<?= $this->get_name() ?>">
+				<?php
+				foreach ( $this->tabs as $tab ):
+					?>
+					<div id="<?php echo $tab->id; ?>" class="group" style="display: none;">
+						<?php foreach ( $tab->sections as $section ): ?>
+							<?php if ( $section->title ): ?>
+								<h2><?php echo $section->title ?></h2>
+							<?php endif; ?>
+							<?php
+							if ( $section->callback ) {
+								call_user_func( $section->callback, $section );
+							}
+							?>
+							<table class="form-table">
+								<?php do_settings_fields( $this->get_full_name(), $section->id ); ?>
+							</table>
+						<?php endforeach; ?>
+					</div>
+				<?php endforeach; ?>
+				<hr/>
+				<?php
+				foreach ( $this->sections as $section ) :
+					?>
+					<table class="form-table">
+						<?php if ( $section->title ): ?>
+							<h2><?php echo $section->title ?></h2>
+						<?php endif; ?>
+						<?php
+						if ( $section->callback ) {
+							call_user_func( $section->callback, $section );
+						}
+						?>
+						<?php do_settings_fields( $this->get_full_name(), $section->id ); ?>
+					</table>
+				<?php endforeach; ?>
+				<?php submit_button(); ?>
+			</form>
+		</div>
+		<?php
+	}
+
+	/**
+	 * @param \pcfreak30\ComposePress\Settings\UI\Section $section
+	 */
+	public function add_section( Section $section ) {
+		$this->sections[] = $section;
+	}
+
+	/**
+	 * @param \pcfreak30\ComposePress\Settings\UI\Tab $tab
+	 */
+	public function add_tab( Tab $tab ) {
+		$this->tabs[] = $tab;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_default() {
+		return $this->default;
+	}
+
+	/**
+	 * @param bool $default
+	 */
+	public function set_default( $default ) {
+		$this->default = $default;
+	}
+
+	/**
+	 * @return \pcfreak30\ComposePress\Settings\UI\Tab[]
+	 */
+	public function get_tabs() {
+		return $this->tabs;
+	}
+}
