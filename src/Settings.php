@@ -5,6 +5,7 @@ namespace ComposePress;
 
 
 use ComposePress\Core\Abstracts\Component;
+use ComposePress\Settings\Registry;
 
 /**
  * Class Settings
