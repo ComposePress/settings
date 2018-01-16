@@ -1,9 +1,9 @@
 <?php
 
-namespace pcfreak30\ComposePress\Settings\Managers;
+namespace ComposePress\Core\Settings\Managers;
 
 
-use pcfreak30\ComposePress\Abstracts\Manager;
+use ComposePress\Core\Abstracts\Manager;
 
 class Page extends Manager {
 

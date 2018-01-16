@@ -1,9 +1,9 @@
 <?php
 
-namespace pcfreak30\ComposePress\Settings\UI\Fields;
+namespace ComposePress\Core\Settings\UI\Fields;
 
-use pcfreak30\ComposePress\Settings\Abstracts\FieldType;
-use pcfreak30\ComposePress\Settings\UI\Field;
+use ComposePress\Core\Settings\Abstracts\FieldType;
+use ComposePress\Core\Settings\UI\Field;
 
 class Text extends FieldType {
 	const NAME = 'text';

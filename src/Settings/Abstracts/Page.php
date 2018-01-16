@@ -1,15 +1,15 @@
 <?php
 
-namespace pcfreak30\ComposePress\Settings\Abstracts;
+namespace ComposePress\Core\Settings\Abstracts;
 
-use pcfreak30\ComposePress\Abstracts\Component;
-use pcfreak30\ComposePress\Settings\UI\Section;
-use pcfreak30\ComposePress\Settings\UI\Tab;
+use ComposePress\Core\Abstracts\Component;
+use ComposePress\Core\Settings\UI\Section;
+use ComposePress\Core\Settings\UI\Tab;
 
 /**
  * Class Page
  *
- * @package pcfreak30\ComposePress\Settings\Abstracts
+ * @package ComposePress\Core\Settings\Abstracts
  * @property string    $name
  * @property string    $full_name
  * @property string    $title
@@ -34,12 +34,12 @@ abstract class Page extends Component {
 	 */
 	const NETWORK_CAPABILITY = '';
 	/**
-	 * @var \pcfreak30\ComposePress\Settings\UI\Section[]
+	 * @var \ComposePress\Core\Settings\UI\Section[]
 	 */
 	protected $sections = [];
 
 	/**
-	 * @var \pcfreak30\ComposePress\Settings\UI\Tab[]
+	 * @var \ComposePress\Core\Settings\UI\Tab[]
 	 */
 	protected $tabs = [];
 
@@ -49,7 +49,7 @@ abstract class Page extends Component {
 	protected $default = false;
 
 	/**
-	 * @return \pcfreak30\ComposePress\Settings\UI\Section[]
+	 * @return \ComposePress\Core\Settings\UI\Section[]
 	 */
 	public function get_sections() {
 		return $this->sections;
@@ -302,14 +302,14 @@ abstract class Page extends Component {
 	}
 
 	/**
-	 * @param \pcfreak30\ComposePress\Settings\UI\Section $section
+	 * @param \ComposePress\Core\Settings\UI\Section $section
 	 */
 	public function add_section( Section $section ) {
 		$this->sections[] = $section;
 	}
 
 	/**
-	 * @param \pcfreak30\ComposePress\Settings\UI\Tab $tab
+	 * @param \ComposePress\Core\Settings\UI\Tab $tab
 	 */
 	public function add_tab( Tab $tab ) {
 		$this->tabs[] = $tab;
@@ -330,7 +330,7 @@ abstract class Page extends Component {
 	}
 
 	/**
-	 * @return \pcfreak30\ComposePress\Settings\UI\Tab[]
+	 * @return \ComposePress\Core\Settings\UI\Tab[]
 	 */
 	public function get_tabs() {
 		return $this->tabs;

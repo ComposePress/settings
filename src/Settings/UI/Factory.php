@@ -1,33 +1,33 @@
 <?php
 
 
-namespace pcfreak30\ComposePress\Settings\UI;
+namespace ComposePress\Core\Settings\UI;
 
 
-use pcfreak30\ComposePress\Abstracts\Component;
-use pcfreak30\ComposePress\Settings\Abstracts\Page;
+use ComposePress\Core\Abstracts\Component;
+use ComposePress\Core\Settings\Abstracts\Page;
 
 class Factory {
 
 	/**
-	 * @var \pcfreak30\ComposePress\Abstracts\Plugin
+	 * @var \ComposePress\Core\Abstracts\Plugin
 	 */
 	private static $plugin;
 
 	/**
-	 * @param \pcfreak30\ComposePress\Abstracts\Plugin $plugin
+	 * @param \ComposePress\Core\Abstracts\Plugin $plugin
 	 */
 	public static function init( $plugin ) {
 		self::$plugin = $plugin;
 	}
 
 	/**
-	 * @param string                                          $id
-	 * @param string                                          $title
-	 * @param \pcfreak30\ComposePress\Settings\Abstracts\Page $page
-	 * @param null                                            $description
-	 * @param bool                                            $tab
-	 * @param mixed                                           $callback
+	 * @param string                                     $id
+	 * @param string                                     $title
+	 * @param \ComposePress\Core\Settings\Abstracts\Page $page
+	 * @param null                                       $description
+	 * @param bool                                       $tab
+	 * @param mixed                                      $callback
 	 *
 	 * @return mixed
 	 */
@@ -37,8 +37,8 @@ class Factory {
 			throw new \Exception( sprintf( __( '% requires either a valid Page or Tab to connect to', self::$plugin->safe_slug ), __METHOD__ ) );
 		}
 
-		/** @var \pcfreak30\ComposePress\Settings\UI\Section $section */
-		$section = self::$plugin->container->create( '\pcfreak30\ComposePress\Settings\UI\Section', [
+		/** @var \ComposePress\Core\Settings\UI\Section $section */
+		$section = self::$plugin->container->create( '\ComposePress\Core\Settings\UI\Section', [
 			$id,
 			$title,
 			$parent,
@@ -54,15 +54,15 @@ class Factory {
 	}
 
 	/**
-	 * @param string                                          $id
-	 * @param string                                          $title
-	 * @param \pcfreak30\ComposePress\Settings\Abstracts\Page $page
+	 * @param string                                     $id
+	 * @param string                                     $title
+	 * @param \ComposePress\Core\Settings\Abstracts\Page $page
 	 *
-	 * @return \pcfreak30\ComposePress\Settings\UI\Tab
+	 * @return \ComposePress\Core\Settings\UI\Tab
 	 */
 	public static function tab( $id, $title, Page $page ) {
-		/** @var \pcfreak30\ComposePress\Settings\UI\Tab $tab */
-		$tab         = self::$plugin->container->create( '\pcfreak30\ComposePress\Settings\UI\Tab', [
+		/** @var \ComposePress\Core\Settings\UI\Tab $tab */
+		$tab         = self::$plugin->container->create( '\ComposePress\Core\Settings\UI\Tab', [
 			$id,
 			$title,
 		] );
@@ -74,16 +74,16 @@ class Factory {
 	}
 
 	/**
-	 * @param string                                      $name
-	 * @param string                                      $title
-	 * @param string                                      $type
-	 * @param \pcfreak30\ComposePress\Settings\UI\Section $section
+	 * @param string                                 $name
+	 * @param string                                 $title
+	 * @param string                                 $type
+	 * @param \ComposePress\Core\Settings\UI\Section $section
 	 *
 	 * @return mixed
 	 */
 	public static function field( $name, $title, $type, Section $section, $args = [] ) {
-		/** @var \pcfreak30\ComposePress\Settings\UI\Field $field */
-		$field         = self::$plugin->container->create( '\pcfreak30\ComposePress\Settings\UI\Field', [
+		/** @var \ComposePress\Core\Settings\UI\Field $field */
+		$field         = self::$plugin->container->create( '\ComposePress\Core\Settings\UI\Field', [
 			$name,
 			$title,
 			$type,

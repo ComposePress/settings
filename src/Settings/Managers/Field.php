@@ -1,10 +1,10 @@
 <?php
 
-namespace pcfreak30\ComposePress\Settings\Managers;
+namespace ComposePress\Core\Settings\Managers;
 
-use pcfreak30\ComposePress\Abstracts\Manager;
+use ComposePress\Core\Abstracts\Manager;
 
 class Field extends Manager {
-	const MODULE_NAMESPACE = '\pcfreak30\ComposePress\Settings\UI\Fields';
+	const MODULE_NAMESPACE = '\ComposePress\Core\Settings\UI\Fields';
 	protected $modules = [ 'Text' ];
 }

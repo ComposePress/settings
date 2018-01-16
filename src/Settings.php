@@ -1,16 +1,16 @@
 <?php
 
 
-namespace pcfreak30\ComposePress;
+namespace ComposePress\Core;
 
 
-use pcfreak30\ComposePress\Abstracts\Component;
-use pcfreak30\ComposePress\Settings\Registry;
+use ComposePress\Core\Abstracts\Component;
+use ComposePress\Core\Settings\Registry;
 
 /**
  * Class Settings
  *
- * @package pcfreak30\ComposePress
+ * @package ComposePress\Core
  */
 class Settings extends Component {
 

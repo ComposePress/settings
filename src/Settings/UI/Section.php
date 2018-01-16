@@ -1,20 +1,20 @@
 <?php
 
 
-namespace pcfreak30\ComposePress\Settings\UI;
+namespace ComposePress\Core\Settings\UI;
 
 
-use pcfreak30\ComposePress\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 
 /**
  * Class Section
  *
- * @package pcfreak30\ComposePress\Settings\UI
- * @property  string                                          $id
- * @property  string                                          $title
- * @property  callable                                        $callback
- * @property  \pcfreak30\ComposePress\Settings\Abstracts\Page $parent
- * @property bool                                             tab
+ * @package ComposePress\Core\Settings\UI
+ * @property  string                                     $id
+ * @property  string                                     $title
+ * @property  callable                                   $callback
+ * @property  \ComposePress\Core\Settings\Abstracts\Page $parent
+ * @property bool                                        tab
  */
 class Section extends Component {
 	/**
@@ -31,7 +31,7 @@ class Section extends Component {
 	protected $callback;
 
 	/**
-	 * @var \pcfreak30\ComposePress\Settings\UI\Field[]
+	 * @var \ComposePress\Core\Settings\UI\Field[]
 	 */
 	protected $fields = [];
 	/**
@@ -42,11 +42,11 @@ class Section extends Component {
 	/**
 	 * Section constructor.
 	 *
-	 * @param string                                      $id
-	 * @param string                                      $title
-	 * @param \pcfreak30\ComposePress\Abstracts\Component $parent
-	 * @param string                                      $description
-	 * @param callable                                    $callback
+	 * @param string                                 $id
+	 * @param string                                 $title
+	 * @param \ComposePress\Core\Abstracts\Component $parent
+	 * @param string                                 $description
+	 * @param callable                               $callback
 	 */
 	public function __construct( $id, $title, Component $parent, $description = null, $callback = null ) {
 
@@ -156,7 +156,7 @@ class Section extends Component {
 	}
 
 	/**
-	 * @return \pcfreak30\ComposePress\Settings\UI\Field[]
+	 * @return \ComposePress\Core\Settings\UI\Field[]
 	 */
 	public function get_fields() {
 		return $this->fields;

@@ -1,10 +1,10 @@
 <?php
 
-namespace pcfreak30\ComposePress\Settings\Abstracts;
+namespace ComposePress\Core\Settings\Abstracts;
 
-use pcfreak30\ComposePress\Abstracts\Component;
-use pcfreak30\ComposePress\Settings\Registry;
-use pcfreak30\ComposePress\Settings\UI\Field;
+use ComposePress\Core\Abstracts\Component;
+use ComposePress\Core\Settings\Registry;
+use ComposePress\Core\Settings\UI\Field;
 
 abstract class FieldType extends Component {
 
@@ -26,9 +26,9 @@ abstract class FieldType extends Component {
 	}
 
 	/**
-	 * @param string                                          $option_value
-	 * @param string                                          $option_slug
-	 * @param \pcfreak30\ComposePress\Settings\Abstracts\Page $page
+	 * @param string                                     $option_value
+	 * @param string                                     $option_slug
+	 * @param \ComposePress\Core\Settings\Abstracts\Page $page
 	 *
 	 * @return mixed
 	 */

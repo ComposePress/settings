@@ -1,16 +1,16 @@
 <?php
 
 
-namespace pcfreak30\ComposePress\Settings\UI;
+namespace ComposePress\Core\Settings\UI;
 
 
-use pcfreak30\ComposePress\Abstracts\Component;
+use ComposePress\Core\Abstracts\Component;
 
 /**
  * Class Tab
  *
- * @package pcfreak30\ComposePress\Settings\UI
- * @property \pcfreak30\ComposePress\Settings\UI\Section[] $sections
+ * @package ComposePress\Core\Settings\UI
+ * @property \ComposePress\Core\Settings\UI\Section[] $sections
  */
 class Tab extends Component {
 	/**
@@ -53,7 +53,7 @@ class Tab extends Component {
 	}
 
 	/**
-	 * @param \pcfreak30\ComposePress\Settings\UI\Section $section
+	 * @param \ComposePress\Core\Settings\UI\Section $section
 	 */
 	public function add_section( Section $section ) {
 		$this->sections[] = $section;

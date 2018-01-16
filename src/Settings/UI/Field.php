@@ -1,22 +1,22 @@
 <?php
 
 
-namespace pcfreak30\ComposePress\Settings\UI;
+namespace ComposePress\Core\Settings\UI;
 
-use pcfreak30\ComposePress\Abstracts\Component;
-use pcfreak30\ComposePress\Settings\Abstracts\Page;
+use ComposePress\Core\Abstracts\Component;
+use ComposePress\Core\Settings\Abstracts\Page;
 
 
 /**
  * Class Field
  *
- * @package pcfreak30\ComposePress\Settings\UI
- * @property \pcfreak30\ComposePress\Settings\UI\Field   $fields
- * @property string                                      $name
- * @property string                                      $title
- * @property string                                      $type
- * @property array                                       $args
- * @property \pcfreak30\ComposePress\Settings\UI\Section $parent
+ * @package ComposePress\Core\Settings\UI
+ * @property \ComposePress\Core\Settings\UI\Field   $fields
+ * @property string                                 $name
+ * @property string                                 $title
+ * @property string                                 $type
+ * @property array                                  $args
+ * @property \ComposePress\Core\Settings\UI\Section $parent
  */
 class Field extends Component {
 	/**
@@ -45,11 +45,11 @@ class Field extends Component {
 	/**
 	 * Section constructor.
 	 *
-	 * @param  string                                       $name
-	 * @param  string                                       $title
-	 * @param  string                                       $type
-	 * @param   \pcfreak30\ComposePress\Settings\UI\Section $section
-	 * @param array                                         $args
+	 * @param  string                                  $name
+	 * @param  string                                  $title
+	 * @param  string                                  $type
+	 * @param   \ComposePress\Core\Settings\UI\Section $section
+	 * @param array                                    $args
 	 */
 	public function __construct( $name, $title, $type, $section, $args = [] ) {
 

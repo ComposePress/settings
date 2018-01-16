@@ -1,17 +1,17 @@
 <?php
 
-namespace pcfreak30\ComposePress\Settings\Abstracts;
+namespace ComposePress\Core\Settings\Abstracts;
 
-use pcfreak30\ComposePress\Abstracts\Component;
-use pcfreak30\ComposePress\Settings\Managers\Field;
-use pcfreak30\ComposePress\Settings\Managers\Page;
-use pcfreak30\ComposePress\Settings\Registry;
-use pcfreak30\ComposePress\Settings\UI\Factory;
+use ComposePress\Core\Abstracts\Component;
+use ComposePress\Core\Settings\Managers\Field;
+use ComposePress\Core\Settings\Managers\Page;
+use ComposePress\Core\Settings\Registry;
+use ComposePress\Core\Settings\UI\Factory;
 
 /**
  * Class UI
  *
- * @package pcfreak30\ComposePress\Settings\Abstracts
+ * @package ComposePress\Core\Settings\Abstracts
  */
 abstract class UI extends Component {
 
@@ -24,11 +24,11 @@ abstract class UI extends Component {
 	 */
 	protected $network_capability = 'manage_options';
 	/**
-	 * @var \pcfreak30\ComposePress\Settings\Managers\Page
+	 * @var \ComposePress\Core\Settings\Managers\Page
 	 */
 	protected $pages_manager;
 	/**
-	 * @var \pcfreak30\ComposePress\Settings\Managers\Field
+	 * @var \ComposePress\Core\Settings\Managers\Field
 	 */
 	protected $fields_manager;
 	/**
@@ -43,8 +43,8 @@ abstract class UI extends Component {
 	/**
 	 * UI constructor.
 	 *
-	 * @param \pcfreak30\ComposePress\Settings\Managers\Page  $pages_manager
-	 * @param \pcfreak30\ComposePress\Settings\Managers\Field $fields_manager
+	 * @param \ComposePress\Core\Settings\Managers\Page  $pages_manager
+	 * @param \ComposePress\Core\Settings\Managers\Field $fields_manager
 	 */
 	public function __construct( Page $pages_manager, Field $fields_manager ) {
 		$this->pages_manager  = $pages_manager;
@@ -147,7 +147,7 @@ abstract class UI extends Component {
 	}
 
 	/**
-	 * @return \pcfreak30\ComposePress\Settings\Abstracts\Page|bool
+	 * @return \ComposePress\Core\Settings\Abstracts\Page|bool
 	 */
 	protected function get_current_page() {
 		$pages   = apply_filters( "{$this->plugin->safe_slug}_admin_ui_pages", [] );
@@ -183,7 +183,7 @@ abstract class UI extends Component {
 	 *
 	 */
 	public function settings_init() {
-		/** @var \pcfreak30\ComposePress\Settings\Abstracts\Page[] $pages */
+		/** @var \ComposePress\Core\Settings\Abstracts\Page[] $pages */
 		$pages = apply_filters( "{$this->plugin->safe_slug}_admin_ui_pages", [] );
 		remove_action( 'admin_init', [
 			$this,
@@ -251,28 +251,28 @@ abstract class UI extends Component {
 	}
 
 	/**
-	 * @return \pcfreak30\ComposePress\Settings\Managers\Page
+	 * @return \ComposePress\Core\Settings\Managers\Page
 	 */
 	public function get_pages_manager() {
 		return $this->pages_manager;
 	}
 
 	/**
-	 * @param \pcfreak30\ComposePress\Settings\Managers\Page $pages_manager
+	 * @param \ComposePress\Core\Settings\Managers\Page $pages_manager
 	 */
 	public function set_pages_manager( $pages_manager ) {
 		$this->pages_manager = $pages_manager;
 	}
 
 	/**
-	 * @return \pcfreak30\ComposePress\Settings\Managers\Field
+	 * @return \ComposePress\Core\Settings\Managers\Field
 	 */
 	public function get_fields_manager() {
 		return $this->fields_manager;
 	}
 
 	/**
-	 * @param \pcfreak30\ComposePress\Settings\Managers\Field $fields_manager
+	 * @param \ComposePress\Core\Settings\Managers\Field $fields_manager
 	 */
 	public function set_fields_manager( $fields_manager ) {
 		$this->fields_manager = $fields_manager;
@@ -282,7 +282,7 @@ abstract class UI extends Component {
 	 *
 	 */
 	public function settings_ui() {
-		/** @var \pcfreak30\ComposePress\Settings\Abstracts\Page[] $pages */
+		/** @var \ComposePress\Core\Settings\Abstracts\Page[] $pages */
 		$pages           = apply_filters( "{$this->plugin->safe_slug}_admin_ui_pages", [] );
 		$current_page_id = $this->get_current_page_id();
 		if ( $this->plugin->safe_slug === $current_page_id ) {
@@ -295,7 +295,7 @@ abstract class UI extends Component {
 			}
 
 			if ( ! $current_page ) {
-				/** @var \pcfreak30\ComposePress\Settings\Abstracts\Page[] $page_objects */
+				/** @var \ComposePress\Core\Settings\Abstracts\Page[] $page_objects */
 				$page_objects = array_values( $pages );
 				$current_page = $this->plugin->safe_slug . '_' . $page_objects[0]->name;
 			}
@@ -337,7 +337,7 @@ abstract class UI extends Component {
 			if ( ! isset( $pages[ $_POST['page'] ] ) ) {
 				return;
 			}
-			/** @var \pcfreak30\ComposePress\Settings\Abstracts\Page $page */
+			/** @var \ComposePress\Core\Settings\Abstracts\Page $page */
 			$page               = $pages[ $_POST['page'] ];
 			$wp_settings_fields = $this->wp_settings_fields;
 			$option             = [ $_POST['page'] => [] ];
