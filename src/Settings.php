@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ComposePress\Settings;
+namespace ComposePress;
 
 
 use ComposePress\Core\Abstracts\Component;
