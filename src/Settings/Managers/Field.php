@@ -11,6 +11,7 @@ class Field extends Manager {
 		'ColorPicker',
 		'File',
 		'Html',
+		'Image',
 		'Text',
 	];
 }
