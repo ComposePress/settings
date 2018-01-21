@@ -14,6 +14,7 @@ class Field extends Manager {
 		'Image',
 		'MultiCheckbox',
 		'Number',
+		'Pages',
 		'Text',
 	];
 }
