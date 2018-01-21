@@ -19,6 +19,7 @@ class Field extends Manager {
 		'Radio',
 		'Select',
 		'Textarea',
+		'Url',
 		'Text',
 	];
 }
