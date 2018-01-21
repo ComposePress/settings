@@ -16,6 +16,7 @@ class Field extends Manager {
 		'Number',
 		'Pages',
 		'Password',
+		'Radio',
 		'Text',
 	];
 }
