@@ -137,97 +137,153 @@ abstract class Page extends Component {
 
 		wp_enqueue_media();
 		wp_enqueue_script( 'wp-color-picker' );
-		wp_add_inline_script( 'jquery-core',
-			'(function ($) {
-	$(function () {
-		var unsaved = false;
-		//Initiate Color Picker
-		$(\'.wp-color-picker-field\').wpColorPicker();
+		ob_start();
+		?>
+		<script>
+					(function ($) {
+						$(function () {
+							var unsaved = false;
+							//Initiate Color Picker
+							$('.wp-color-picker-field').wpColorPicker();
 
-		// Switches option sections
-		$(\'.group\').hide();
-		var activetab = window.location.hash;
-		if ((!activetab.length || !$(activetab).length) && typeof(localStorage) != \'undefined\') {
-			activetab = localStorage.getItem("' . $this->plugin_page . '_activetab");
-		}
-		if (activetab != \'\' && $(activetab).length) {
-			$(activetab).fadeIn();
-		} else {
-			$(\'.group:first\').fadeIn();
-		}
-		if (activetab != \'\' && $(activetab + \'-tab\').length) {
-			$(activetab + \'-tab\').addClass(\'nav-tab-active\');
-		}
-		else {
-			$(\'.nav-tab-wrapper a:first\').addClass(\'nav-tab-active\');
-		}
-		$(\'.nav-tab-wrapper a\').click(function (evt) {
-			$(\'.nav-tab-wrapper a\').removeClass(\'nav-tab-active\');
-			$(this).addClass(\'nav-tab-active\').blur();
-			var clicked_group = $(this).attr(\'href\');
-			if (typeof(localStorage) != \'undefined\') {
-				localStorage.setItem("' . $this->plugin_page . '_activetab", $(this).attr(\'href\'));
-			}
-			$(\'.group\').hide();
-			$(clicked_group).fadeIn();
-			if(history.pushState) {
-    			history.pushState(null, null, $(this).attr(\'href\'));
-			} else {
-    			location.hash = $(this).attr(\'href\');
-			}
-			evt.preventDefault();
-		});
-		$("#wpbody-content").prepend($("<div />", {
-			class: "notifications"
-		}));
-		$("form").submit(function (event) {
-			event.preventDefault();
-			var data = {};
-			$(\'form tr\').filter(function() {
-				return $(this).css(\'display\') !== \'none\';
-			}).find(\'input, select, textarea\').serializeArray().map(function(x) {
-				data[x.name] = x.value;
-			});
-			data[ "_wpnonce" ] = ' . wp_json_encode( wp_create_nonce( $this->plugin->slug . '_save-settings' ) ) . ';
-								data["action"] = ' . wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) . ';
-								data["page"] = $(this).data("page");
-								$(".notifications").html($("<div />", {
-									class:"notice notice-info",
-								}).append($("<i />", {
-									class: "spinner is-active",
-									}).css({
-											float: "none",
-											width: "auto",
-											height: "auto",
-											padding: "10px 0 10px 50px",
-											backgroundPosition: "20px 0;"
-										})
-									).append("' . __( 'Saving...', $this->plugin->safe_slug ) . '")
-								);
-								$.post("' . admin_url( 'admin-post.php' ) . '", data, null, "json")
-								.done(function(response){
-									$(".notifications").html(response.notifications).children().hide();
-									if(0 < $(".notifications .updated").length) {
-										unsaved = false;
+							// Switches option sections
+							$('.group').hide();
+							var activetab = window.location.hash;
+							if ((!activetab.length || !$(activetab).length) && typeof(localStorage) != 'undefined') {
+								activetab = localStorage.getItem("' . $this->plugin_page . '_activetab");
+							}
+							if (activetab != '' && $(activetab).length) {
+								$(activetab).fadeIn();
+							} else {
+								$('.group:first').fadeIn();
+							}
+							if (activetab != '' && $(activetab + '-tab').length) {
+								$(activetab + '-tab').addClass('nav-tab-active');
+							}
+							else {
+								$('.nav-tab-wrapper a:first').addClass('nav-tab-active');
+							}
+							$('.nav-tab-wrapper a').click(function (evt) {
+								$('.nav-tab-wrapper a').removeClass('nav-tab-active');
+								$(this).addClass('nav-tab-active').blur();
+								var clicked_group = $(this).attr('href');
+								if (typeof(localStorage) != 'undefined') {
+									localStorage.setItem("' . $this->plugin_page . '_activetab", $(this).attr('href'));
+								}
+								$('.group').hide();
+								$(clicked_group).fadeIn();
+								if (history.pushState) {
+									history.pushState(null, null, $(this).attr('href'));
+								} else {
+									location.hash = $(this).attr('href');
+								}
+								evt.preventDefault();
+							});
+							$("#wpbody-content").prepend($("<div />", {
+								class: "notifications"
+							}));
+							$("form").submit(function (event) {
+								event.preventDefault();
+								var data = {};
+								$('form tr').filter(function () {
+									return $(this).css('display') !== 'none';
+								}).find('input:not([type=checkbox]):not([type=radio]),input:checked, select, textarea').serializeArray().map(function (x) {
+									if (x.name.endsWith('[]')) {
+										var name = x.name.replace('[]', '');
+										data[ name ] = (data[ name ] || []);
+										data[ name ].push(x.value);
+										return;
 									}
-								}).fail(function(){
-									$(".notifications").html("' . str_replace( "\n", '', trim( $settings_failure_notification ) ) . '").children().hide();
-								}).then(function(){
+									data[ x.name ] = x.value;
+								});
+								data[ "_wpnonce" ] = <?php echo wp_json_encode( wp_create_nonce( $this->plugin->slug . '_save-settings' ) ) ?>;
+								data[ "action" ] = <?php echo wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) ?>;
+								data[ "page" ] = $(this).data("page");
+								$(".notifications").html($("<div />", {
+																		class: "notice notice-info"
+																	}).append($("<i />", {
+																		class: "spinner is-active"
+									}).css({
+																		float: "none",
+																		width: "auto",
+																		height: "auto",
+																		padding: "10px 0 10px 50px",
+																		backgroundPosition: "20px 0;"
+																	})
+																	).append("<?php  _e( 'Saving...', $this->plugin->safe_slug ) ?>")
+								);
+								$.post("<?php echo admin_url( 'admin-post.php' )  ?>", data, null, "json")
+									.done(function (response) {
+										$(".notifications").html(response.notifications).children().hide();
+										if (0 < $(".notifications .updated").length) {
+											unsaved = false;
+										}
+									}).fail(function () {
+									$(".notifications").html("<?php str_replace( "\n", '', trim( $settings_failure_notification ) ) ?>").children().hide();
+								}).then(function () {
 									$(".notifications").children().fadeIn()
 									$(document).trigger("wp-updates-notice-added");
 								});
 							});
-			$("form").on("change", "input, textarea, select", function(){
-				unsaved = true;
-			})
-			$( window ).on("beforeunload",function() {
-				if(!unsaved){
-					return;
-				}
-  				return "' . __( 'You have unsaved changes on this page. Are you sure you want to leave without saving?', $this->plugin->safe_slug ) . '";
-			});
-		});
-})(jQuery);' );
+							$("form").on("change", "input, textarea, select", function () {
+								unsaved = true;
+							})
+							$(window).on("beforeunload", function () {
+								if (!unsaved) {
+									return;
+								}
+								return "<?php _e( 'You have unsaved changes on this page. Are you sure you want to leave without saving?', $this->plugin->safe_slug ) ?>";
+							});
+							$('.wpsa-browse').on('click', function (event) {
+								event.preventDefault();
+								var attachment;
+								var self = $(this);
+								// Create the media frame.
+								var file_frame = wp.media.frames.file_frame = wp.media({
+									title: self.data('uploader_title'),
+									button: {
+										text: self.data('uploader_button_text'),
+									},
+									multiple: false
+								})
+									.on('select', function () {
+										attachment = file_frame.state().get('selection').first().toJSON();
+										self.prev('.wpsa-url').val(attachment.url).change();
+									})
+									// Finally, open the modal
+									.open();
+							});
+							$('.wpsa-image-browse').on('click', function (event) {
+								event.preventDefault();
+								var attachment;
+								var self = $(this);
+								// Create the media frame.
+								var file_frame = wp.media.frames.file_frame = wp.media({
+									title: self.data('uploader_title'),
+									button: {
+										text: self.data('uploader_button_text'),
+									},
+									multiple: false,
+									library: { type: 'image' }
+								})
+									.on('select', function () {
+										attachment = file_frame.state().get('selection').first().toJSON();
+										var url;
+										if (attachment.sizes && attachment.sizes.thumbnail)
+											url = attachment.sizes.thumbnail.url;
+										else
+											url = attachment.url;
+										self.parent().children('.wpsa-image-id').val(attachment.id).change();
+										self.parent().children('.wpsa-image-preview').children('img').attr('src', url);
+									})
+									// Finally, open the modal
+									.open();
+							});
+						});
+					})(jQuery);
+		</script>
+		<?php
+		wp_add_inline_script( 'jquery-core', $data = trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', ob_get_clean() ) ) );
 	}
 
 	/**

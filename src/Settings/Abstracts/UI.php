@@ -345,9 +345,14 @@ abstract class UI extends Component {
 			$input_data         = file_get_contents( 'php://input' );
 			$pairs              = explode( '&', $input_data );
 			foreach ( $pairs as $pair ) {
-				$nv            = explode( "=", $pair );
-				$name          = urldecode( $nv[0] );
-				$value         = urldecode( $nv[1] );
+				$nv    = explode( "=", $pair );
+				$name  = urldecode( $nv[0] );
+				$value = urldecode( $nv[1] );
+				if ( 0 < preg_match( '~' . preg_quote( '[]', '~' ) . '$~', $name ) ) {
+					$name            = str_replace( '[]', '', $name );
+					$data[ $name ][] = $value;
+					continue;
+				}
 				$data[ $name ] = $value;
 			}
 			foreach ( $wp_settings_fields[ $page->full_name ] as $section ) {
