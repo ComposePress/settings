@@ -41,7 +41,7 @@ class Registry {
 		foreach ( $options as $key => $value ) {
 			$new_key = $parent . ( empty( $parent ) ? '' : '.' ) . $key;
 
-			if ( is_array( $value ) ) {
+			if ( is_array( $value ) && 0 < count( array_filter( array_keys( $value ), 'is_string' ) ) ) {
 				/** @noinspection PhpMethodParametersCountMismatchInspection */
 				$result += self::dotify( $value, $new_key );
 			} else {
