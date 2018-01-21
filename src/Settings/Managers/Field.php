@@ -6,5 +6,8 @@ use ComposePress\Core\Abstracts\Manager;
 
 class Field extends Manager {
 	const MODULE_NAMESPACE = '\ComposePress\Settings\UI\Fields';
-	protected $modules = [ 'Text' ];
+	protected $modules = [
+		'Checkbox',
+		'Text',
+	];
 }
