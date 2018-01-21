@@ -10,6 +10,7 @@ class Field extends Manager {
 		'Checkbox',
 		'ColorPicker',
 		'File',
+		'Html',
 		'Text',
 	];
 }
