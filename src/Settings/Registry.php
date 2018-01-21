@@ -75,7 +75,7 @@ class Registry {
 
 	public static function undotify( $options ) {
 		$new_options = [];
-		foreach ( $options as $option => $value ) {
+		foreach ( (array) $options as $option => $value ) {
 			$parts = explode( '.', $option );
 			$count = substr_count( $option, '.' ) + 1;
 			$last  = &$new_options;
