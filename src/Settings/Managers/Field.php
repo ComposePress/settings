@@ -13,6 +13,7 @@ class Field extends Manager {
 		'Html',
 		'Image',
 		'MultiCheckbox',
+		'Number',
 		'Text',
 	];
 }
