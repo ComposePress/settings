@@ -36,10 +36,13 @@ abstract class FieldType extends Component {
 		return $option_value;
 	}
 
-	protected static function get_description( $params ) {
+	protected static function get_description( $params, $html = true ) {
 		$desc = '';
-		if ( ! empty( $args['desc'] ) ) {
-			$desc = sprintf( '<p class="description">%s</p>', $args['desc'] );
+		if ( ! empty( $params['desc'] ) ) {
+			$desc = $params['desc'];
+			if ( $html ) {
+				$desc = sprintf( '<p class="description">%s</p>', $desc );
+			}
 		}
 
 		return $desc;
