@@ -12,6 +12,7 @@ class Field extends Manager {
 		'File',
 		'Html',
 		'Image',
+		'MultiCheckbox',
 		'Text',
 	];
 }
