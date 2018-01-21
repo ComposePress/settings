@@ -9,6 +9,7 @@ class Field extends Manager {
 	protected $modules = [
 		'Checkbox',
 		'ColorPicker',
+		'File',
 		'Text',
 	];
 }
