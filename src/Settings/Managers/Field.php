@@ -15,6 +15,7 @@ class Field extends Manager {
 		'MultiCheckbox',
 		'Number',
 		'Pages',
+		'Password',
 		'Text',
 	];
 }
