@@ -18,6 +18,7 @@ class Field extends Manager {
 		'Password',
 		'Radio',
 		'Select',
+		'Textarea',
 		'Text',
 	];
 }
