@@ -20,6 +20,7 @@ class Field extends Manager {
 		'Select',
 		'Textarea',
 		'Url',
+		'Wysiwyg',
 		'Text',
 	];
 }
