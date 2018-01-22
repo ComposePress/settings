@@ -11,7 +11,13 @@ class Select extends FieldType {
 	public static function render( Field $field ) {
 		parent::render( $field );
 		$params = $field->args;
-		$value  = esc_attr( self::get_value( $field ) );
+		$value  = self::get_value( $field );
+		if ( ! empty( $value ) ) {
+			$value = (array) $value;
+			$value = array_map( 'esc_attr', $value );
+			$value = array_flip( $value );
+		}
+
 
 		$size     = isset( $params['size'] ) && null !== $params['size'] ? $params['size'] : 'regular';
 		$default  = isset( $params['default'] );
@@ -24,7 +30,8 @@ class Select extends FieldType {
 			$params['options'] = array_merge( [ '' => $default ], $params['options'] );
 		}
 		foreach ( $params['options'] as $key => $label ) {
-			$html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
+			$selected = isset( $value[ $key ] ) ? $key : false;
+			$html     .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $selected, $key, false ), $label );
 		}
 
 		$html .= '</select>';
