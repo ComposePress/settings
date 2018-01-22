@@ -150,7 +150,7 @@ abstract class Page extends Component {
 							$('.group').hide();
 							var activetab = window.location.hash;
 							if ((!activetab.length || !$(activetab).length) && typeof(localStorage) != 'undefined') {
-								activetab = localStorage.getItem("' . $this->plugin_page . '_activetab");
+								activetab = localStorage.getItem("<?php echo $this->plugin_page ?>_activetab");
 							}
 							if (activetab != '' && $(activetab).length) {
 								$(activetab).fadeIn();
@@ -200,17 +200,17 @@ abstract class Page extends Component {
 								data[ "action" ] = <?php echo wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) ?>;
 								data[ "page" ] = $(this).data("page");
 								$(".notifications").html($("<div />", {
-																		class: "notice notice-info"
-																	}).append($("<i />", {
-																		class: "spinner is-active"
+										class: "notice notice-info"
+									}).append($("<i />", {
+										class: "spinner is-active"
 									}).css({
-																		float: "none",
-																		width: "auto",
-																		height: "auto",
-																		padding: "10px 0 10px 50px",
-																		backgroundPosition: "20px 0;"
-																	})
-																	).append("<?php  _e( 'Saving...', $this->plugin->safe_slug ) ?>")
+										float: "none",
+										width: "auto",
+										height: "auto",
+										padding: "10px 0 10px 50px",
+										backgroundPosition: "20px 0;"
+									})
+									).append("<?php  _e( 'Saving...', $this->plugin->safe_slug ) ?>")
 								);
 								$.post("<?php echo admin_url( 'admin-post.php' )  ?>", data, null, "json")
 									.done(function (response) {
