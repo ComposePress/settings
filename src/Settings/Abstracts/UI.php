@@ -165,7 +165,7 @@ abstract class UI extends Component {
 	protected function get_current_page_id() {
 		$screen = get_current_screen();
 		if ( empty( $screen ) ) {
-			return $_POST['page'];
+			return $_GET['page'];
 		}
 
 		$page = get_current_screen()->id;
