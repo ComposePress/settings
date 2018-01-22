@@ -151,7 +151,9 @@ abstract class UI extends Component {
 	protected function get_current_page() {
 		$pages   = apply_filters( "{$this->plugin->safe_slug}_admin_ui_pages", [] );
 		$page_id = $this->get_current_page_id();
-
+		if ( ! $page_id ) {
+			return false;
+		}
 		foreach ( $pages as $page ) {
 			if ( $page_id === $page->name || ( $page->name === $this->plugin->safe_slug && 1 === count( $pages ) ) ) {
 				return $page;
@@ -165,6 +167,10 @@ abstract class UI extends Component {
 	protected function get_current_page_id() {
 		$screen = get_current_screen();
 		if ( empty( $screen ) ) {
+			if ( ! isset( $_GET['page'] ) ) {
+				return false;
+			}
+
 			return $_GET['page'];
 		}
 
