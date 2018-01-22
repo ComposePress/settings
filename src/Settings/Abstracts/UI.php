@@ -236,10 +236,13 @@ abstract class UI extends Component {
 					'settings_ui',
 				] );
 			}
+
 			$page = $this->get_current_page();
-			Factory::init( $this->plugin );
-			$page->register_settings();
-			$page->build_settings();
+			if ( ! empty( $page ) ) {
+				Factory::init( $this->plugin );
+				$page->register_settings();
+				$page->build_settings();
+			}
 		}
 
 	}
