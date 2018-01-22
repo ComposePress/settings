@@ -181,13 +181,19 @@ abstract class Page extends Component {
 								$('form tr').filter(function () {
 									return $(this).css('display') !== 'none';
 								}).find('input:not([type=checkbox]):not([type=radio]),input:checked, select, textarea').serializeArray().map(function (x) {
-									if (x.name.endsWith('[]')) {
-										var name = x.name.replace('[]', '');
-										data[ name ] = (data[ name ] || []);
-										data[ name ].push(x.value);
-										return;
+																	var name = x.name;
+																	var value = x.value;
+																	if (name.endsWith('[]')) {
+																		name = name.replace('[]', '');
+																	}
+																	if (data[ name ]) {
+																		if (!$.isArray(data[ name ])) {
+																			data[ name ] = [ data[ name ] ];
+																		}
+																		data[ name ].push(value);
+																		return true;
 									}
-									data[ x.name ] = x.value;
+																	data[ name ] = value;
 								});
 								data[ "_wpnonce" ] = <?php echo wp_json_encode( wp_create_nonce( $this->plugin->slug . '_save-settings' ) ) ?>;
 								data[ "action" ] = <?php echo wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) ?>;
