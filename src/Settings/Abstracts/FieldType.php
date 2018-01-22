@@ -64,6 +64,9 @@ abstract class FieldType extends Component {
 			get_called_class(),
 			'sanitize',
 		], 10, 3 );
-		add_action( $this->plugin->safe_slug . '_admin_ui_enqueue_field_js', [ __CLASS__, 'enqueue_scripts' ] );
+		add_action( $this->plugin->safe_slug . '_admin_ui_enqueue_field_js', [
+			get_called_class(),
+			'enqueue_scripts',
+		] );
 	}
 }
