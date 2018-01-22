@@ -171,7 +171,7 @@ abstract class UI extends Component {
 				return false;
 			}
 
-			return $_GET['page'];
+			return str_replace( "{$this->plugin->safe_slug}_", '', $_GET['page'] );
 		}
 
 		$page = get_current_screen()->id;
@@ -295,8 +295,8 @@ abstract class UI extends Component {
 		/** @var \ComposePress\Settings\Abstracts\Page[] $pages */
 		$pages           = apply_filters( "{$this->plugin->safe_slug}_admin_ui_pages", [] );
 		$current_page_id = $this->get_current_page_id();
+		$current_page    = null;
 		if ( $this->plugin->safe_slug === $current_page_id ) {
-			$current_page = null;
 			foreach ( $pages as $page ) {
 				if ( $page->is_default() ) {
 					$current_page = $page;
@@ -309,6 +309,9 @@ abstract class UI extends Component {
 				$page_objects = array_values( $pages );
 				$current_page = $this->plugin->safe_slug . '_' . $page_objects[0]->name;
 			}
+		}
+		if ( ! $current_page ) {
+			$current_page = $current_page_id;
 		}
 		$current_page = str_replace( $this->plugin->safe_slug . '_', '', $current_page );
 		if ( isset( $pages[ $current_page ] ) ) {
