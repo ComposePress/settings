@@ -13,9 +13,10 @@ class Select extends FieldType {
 		$params = $field->args;
 		$value  = esc_attr( self::get_value( $field ) );
 
-		$size    = isset( $params['size'] ) && null !== $params['size'] ? $params['size'] : 'regular';
-		$default = isset( $params['default'] );
-		$html    = sprintf( '<select class="%1$s" name="%2$s" id="%2$s">', $size, $field->name );
+		$size     = isset( $params['size'] ) && null !== $params['size'] ? $params['size'] : 'regular';
+		$default  = isset( $params['default'] );
+		$multiple = isset( $params['multiple'] ) && true === $params['multiple'] ? 'multiple' : '';
+		$html     = sprintf( '<select class="%1$s" name="%2$s" id="%2$s" %3$s>', $size, $field->name, $multiple );
 		if ( $default ) {
 			if ( ! is_string( $default ) ) {
 				$default = __( '-- Select --', $field->plugin->safe_slug );
