@@ -28,6 +28,8 @@ class File extends FieldType {
 
 	public static function enqueue_scripts() {
 		parent::enqueue_scripts();
+
+		wp_enqueue_media();
 		ob_start();
 		?>
 		<script>

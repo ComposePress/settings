@@ -23,4 +23,15 @@ class ColorPicker extends FieldType {
 		echo $html;
 	}
 
+	public static function enqueue_scripts() {
+		parent::enqueue_scripts();
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_add_inline_script( 'wp-color-picker', '(function(){
+			$(function(){
+					$(\'.wp-color-picker-field\').wpColorPicker();
+			})
+		})(jQuery)' );
+	}
+
 }

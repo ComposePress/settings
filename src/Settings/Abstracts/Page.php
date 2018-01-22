@@ -133,19 +133,12 @@ abstract class Page extends Component {
 		$settings_failure_notification = ob_get_clean();
 
 		$wp_settings_errors = $old_wp_settings_errors;
-		wp_enqueue_style( 'wp-color-picker' );
-
-		wp_enqueue_media();
-		wp_enqueue_script( 'wp-color-picker' );
 		ob_start();
 		?>
 		<script>
 					(function ($) {
 						$(function () {
 							var unsaved = false;
-							//Initiate Color Picker
-							$('.wp-color-picker-field').wpColorPicker();
-
 							// Switches option sections
 							$('.group').hide();
 							var activetab = window.location.hash;
