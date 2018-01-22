@@ -29,4 +29,40 @@ class Image extends FieldType {
 
 		echo $html;
 	}
+
+	public static function enqueue_scripts() {
+		parent::enqueue_scripts();
+		ob_start();
+		?>
+		<script>
+					$('.wpsa-image-browse').on('click', function (event) {
+						event.preventDefault();
+						var attachment;
+						var self = $(this);
+						// Create the media frame.
+						var file_frame = wp.media.frames.file_frame = wp.media({
+							title: self.data('uploader_title'),
+							button: {
+								text: self.data('uploader_button_text'),
+							},
+							multiple: false,
+							library: { type: 'image' }
+						})
+							.on('select', function () {
+								attachment = file_frame.state().get('selection').first().toJSON();
+								var url;
+								if (attachment.sizes && attachment.sizes.thumbnail)
+									url = attachment.sizes.thumbnail.url;
+								else
+									url = attachment.url;
+								self.parent().children('.wpsa-image-id').val(attachment.id).change();
+								self.parent().children('.wpsa-image-preview').children('img').attr('src', url);
+							})
+							// Finally, open the modal
+							.open();
+					});
+		</script>
+		<?php
+		wp_add_inline_script( 'jquery-core', trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', ob_get_clean() ) ) );
+	}
 }
