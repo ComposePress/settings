@@ -223,8 +223,7 @@ abstract class Page extends Component {
 									$(".notifications").children().fadeIn()
 									$(document).trigger("wp-updates-notice-added");
 								});
-							});
-							$("form").on("change", "input, textarea, select", function () {
+														}).on("change", "input, textarea, select", function () {
 								unsaved = true;
 							})
 							$(window).on("beforeunload", function () {
