@@ -25,4 +25,37 @@ class File extends FieldType {
 
 		echo $html;
 	}
+
+	public static function enqueue_scripts() {
+		parent::enqueue_scripts();
+		ob_start();
+		?>
+		<script>
+					(function ($) {
+						$(function () {
+							$('.wpsa-browse').on('click', function (event) {
+								event.preventDefault();
+								var attachment;
+								var self = $(this);
+								// Create the media frame.
+								var file_frame = wp.media.frames.file_frame = wp.media({
+									title: self.data('uploader_title'),
+									button: {
+										text: self.data('uploader_button_text'),
+									},
+									multiple: false
+								})
+									.on('select', function () {
+										attachment = file_frame.state().get('selection').first().toJSON();
+										self.prev('.wpsa-url').val(attachment.url).change();
+									})
+									// Finally, open the modal
+									.open();
+							});
+						});
+					})(jQuery);
+		</script>
+		<?php
+		wp_add_inline_script( 'jquery-core', trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', ob_get_clean() ) ) );
+	}
 }

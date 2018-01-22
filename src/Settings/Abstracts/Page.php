@@ -234,25 +234,7 @@ abstract class Page extends Component {
 								}
 								return "<?php _e( 'You have unsaved changes on this page. Are you sure you want to leave without saving?', $this->plugin->safe_slug ) ?>";
 							});
-							$('.wpsa-browse').on('click', function (event) {
-								event.preventDefault();
-								var attachment;
-								var self = $(this);
-								// Create the media frame.
-								var file_frame = wp.media.frames.file_frame = wp.media({
-									title: self.data('uploader_title'),
-									button: {
-										text: self.data('uploader_button_text'),
-									},
-									multiple: false
-								})
-									.on('select', function () {
-										attachment = file_frame.state().get('selection').first().toJSON();
-										self.prev('.wpsa-url').val(attachment.url).change();
-									})
-									// Finally, open the modal
-									.open();
-							});
+
 							$('.wpsa-image-browse').on('click', function (event) {
 								event.preventDefault();
 								var attachment;
@@ -283,7 +265,7 @@ abstract class Page extends Component {
 					})(jQuery);
 		</script>
 		<?php
-		wp_add_inline_script( 'jquery-core', $data = trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', ob_get_clean() ) ) );
+		wp_add_inline_script( 'jquery-core', trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', ob_get_clean() ) ) );
 	}
 
 	/**
