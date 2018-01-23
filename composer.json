@@ -1,7 +1,7 @@
 {
   "name": "composepress/settings",
   "type": "library",
-  "license": "GPL3",
+  "license": "LGPL-3.0-or-later",
   "authors": [
     {
       "name": "Derrick Hammer",
@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "ComposePress/core": "dev-master"
+    "ComposePress/core": "^0.3.0"
   },
   "autoload": {
     "psr-4": {
