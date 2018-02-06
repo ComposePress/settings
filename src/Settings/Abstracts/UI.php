@@ -167,11 +167,11 @@ abstract class UI extends Component {
 	protected function get_current_page_id() {
 		$screen = get_current_screen();
 		if ( empty( $screen ) ) {
-			if ( ! isset( $_GET['page'] ) ) {
+			if ( ! isset( $_REQUEST['page'] ) ) {
 				return false;
 			}
 
-			return str_replace( "{$this->plugin->safe_slug}_", '', $_GET['page'] );
+			return str_replace( "{$this->plugin->safe_slug}_", '', $_REQUEST['page'] );
 		}
 
 		$page = get_current_screen()->id;
@@ -303,12 +303,16 @@ abstract class UI extends Component {
 					break;
 				}
 			}
+			if ( $current_page ) {
+				$current_page = $current_page->full_name;
+			}
 
 			if ( ! $current_page ) {
 				/** @var \ComposePress\Settings\Abstracts\Page[] $page_objects */
 				$page_objects = array_values( $pages );
 				$current_page = $this->plugin->safe_slug . '_' . $page_objects[0]->name;
 			}
+
 		}
 		if ( ! $current_page ) {
 			$current_page = $current_page_id;
