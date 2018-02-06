@@ -52,7 +52,7 @@ class Settings extends Component {
 			$option  = Registry::undotify( [ $page => '' ] );
 			$keys    = array_keys( $option );
 			$page    = array_shift( $keys );
-			$keys    = $option[ $page ];
+			$keys    = array_keys( $option[ $page ] );
 			$setting = array_shift( $keys );
 		}
 
