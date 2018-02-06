@@ -390,6 +390,9 @@ abstract class UI extends Component {
 			} else {
 				$_GET['settings-updated'] = 1;
 				add_settings_error( $page->get_full_name(), 'settings_updated', __( 'Settings saved.', $this->plugin->safe_slug ), 'updated' );
+
+				do_action( "{$this->plugin->safe_slug}_settings_saved", $_POST['page'] );
+				do_action( "{$this->plugin->safe_slug}_{$_POST['page']}_settings_saved" );
 			}
 			ob_start();
 			settings_errors( $page->get_full_name() );
