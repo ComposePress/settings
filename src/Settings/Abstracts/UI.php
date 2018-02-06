@@ -398,6 +398,8 @@ abstract class UI extends Component {
 			settings_errors( $page->get_full_name() );
 			$notifications = ob_get_clean();
 			echo wp_json_encode( [ 'notifications' => $notifications ] );
+
+			return;
 		}
 		status_header( 403 );
 		exit;
