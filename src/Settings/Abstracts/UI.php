@@ -224,7 +224,7 @@ abstract class UI extends Component {
 			$menu = $this->primary_menu ? $this->plugin->safe_slug : $this->parent_menu;
 			if ( 1 === count( $pages ) ) {
 				$page = end( $pages );
-				add_submenu_page( $menu, $page->title, $page->title, $page->capability, $this->plugin->safe_slug, [
+				add_submenu_page( $menu, $page->title, $page->title, $cap, $this->plugin->safe_slug, [
 					$this,
 					'settings_ui',
 				] );
