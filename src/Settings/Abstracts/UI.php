@@ -120,7 +120,7 @@ abstract class UI extends Component {
 	 * @return array
 	 */
 	public function sanitize_options( $options ) {
-
+		global $wp_settings_errors;
 		if ( ! $options ) {
 			return $options;
 		}
@@ -144,6 +144,10 @@ abstract class UI extends Component {
 
 		$options = apply_filters( "{$this->plugin->safe_slug}_admin_ui_page_validate_", $options, $page );
 		$options = apply_filters( "{$this->plugin->safe_slug}_admin_ui_page_validate_{$page->name }", $options, $page );
+
+		if ( ! empty( $wp_settings_errors ) ) {
+			return get_option( $this->plugin->safe_slug );
+		}
 
 		$options = Registry::undotify( $options );
 
