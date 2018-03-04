@@ -388,18 +388,14 @@ abstract class UI extends Component {
 
 			$wp_settings_errors = [];
 			update_option( $this->plugin->safe_slug, $option );
-
-			if ( ! empty( $wp_settings_errors ) ) {
-				ob_start();
-				settings_errors( $page->get_full_name() );
-			} else {
+			ob_start();
+			if ( empty( $wp_settings_errors ) ) {
 				$_GET['settings-updated'] = 1;
 				add_settings_error( $page->get_full_name(), 'settings_updated', __( 'Settings saved.', $this->plugin->safe_slug ), 'updated' );
 
 				do_action( "{$this->plugin->safe_slug}_settings_saved", $_POST['page'] );
 				do_action( "{$this->plugin->safe_slug}_{$_POST['page']}_settings_saved" );
 			}
-			ob_start();
 			settings_errors( $page->get_full_name() );
 			$notifications = ob_get_clean();
 			echo wp_json_encode( [ 'notifications' => $notifications ] );
