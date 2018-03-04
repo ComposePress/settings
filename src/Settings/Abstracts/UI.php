@@ -135,6 +135,8 @@ abstract class UI extends Component {
 						continue;
 					}
 					$options[ $page->name . '.' . $setting_name ] = apply_filters( "{$this->plugin->safe_slug}_admin_ui_field_{$field->type}_sanitize", $setting_value, $setting_name, $page );
+					$options[ $page->name . '.' . $setting_name ] = apply_filters( "{$this->plugin->safe_slug}_admin_ui_field_validate", $options[ $page->name . '.' . $setting_name ], $setting_name, $page );
+					$options[ $page->name . '.' . $setting_name ] = apply_filters( "{$this->plugin->safe_slug}_admin_ui_field_validate_{$setting_name}", $options[ $page->name . '.' . $setting_name ], $page );
 					unset( $options[ $page->name ][ $setting_name ] );
 				}
 			}
