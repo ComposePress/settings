@@ -210,10 +210,10 @@ abstract class UI extends Component {
 			}
 
 			if ( $this->primary_menu ) {
-				add_menu_page( __( $this->plugin->get_plugin_info( 'Name' ), $this->plugin->safe_slug ), __( $this->plugin->get_plugin_info( 'Name' ), $this->plugin->safe_slug ), $cap, $this->plugin->safe_slug, static::get_icon_url(), [
+				add_menu_page( __( $this->plugin->get_plugin_info( 'Name' ), $this->plugin->safe_slug ), __( $this->plugin->get_plugin_info( 'Name' ), $this->plugin->safe_slug ), $cap, $this->plugin->safe_slug, [
 					$this,
 					'settings_ui',
-				] );
+				], static::get_icon_url() );
 			}
 			if ( ! $this->primary_menu ) {
 				add_submenu_page( $this->plugin->safe_slug, $this->plugin->get_plugin_info( 'Name' ), $this->plugin->get_plugin_info( 'Name' ), $cap, $this->plugin->safe_slug, [
