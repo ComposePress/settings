@@ -134,7 +134,7 @@ abstract class UI extends Component {
 					if ( $field->name != $setting_name ) {
 						continue;
 					}
-					$options[ $page->name . '.' . $setting_name ] = apply_filters( "jolt_cache_admin_ui_field_{$field->type}_sanitize", $setting_value, $setting_name, $page );
+					$options[ $page->name . '.' . $setting_name ] = apply_filters( "{$this->plugin->safe_slug}_admin_ui_field_{$field->type}_sanitize", $setting_value, $setting_name, $page );
 					unset( $options[ $page->name ][ $setting_name ] );
 				}
 			}
