@@ -142,8 +142,8 @@ abstract class UI extends Component {
 			}
 		}
 
-		do_action( "{$this->plugin->safe_slug}_admin_ui_page_validate_", $page );
-		do_action( "{$this->plugin->safe_slug}_admin_ui_page_validate_{$page->name }", $page );
+		do_action( "{$this->plugin->safe_slug}_admin_ui_page_validate_", $options, $page );
+		do_action( "{$this->plugin->safe_slug}_admin_ui_page_validate_{$page->name }", $options, $page );
 
 		$options = Registry::undotify( $options );
 
