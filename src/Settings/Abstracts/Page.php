@@ -156,7 +156,7 @@ abstract class Page extends Component {
 							else {
 								$('.nav-tab-wrapper a:first').addClass('nav-tab-active');
 							}
-							$(document).trigger('tab_changed', $($('.nav-tab-active').attr('href')).attr('id'));
+							$(document).trigger('tab_changed', { tab: $($('.nav-tab-active').attr('href')).attr('id') });
 							$('.nav-tab-wrapper a').click(function (evt) {
 								$('.nav-tab-wrapper a').removeClass('nav-tab-active');
 								$(this).addClass('nav-tab-active').blur();
@@ -171,7 +171,7 @@ abstract class Page extends Component {
 								} else {
 									location.hash = $(this).attr('href');
 								}
-								$(document).trigger('tab_changed', $(clicked_group).attr('id'));
+								$(document).trigger('tab_changed', { tab: $(clicked_group).attr('id') });
 								evt.preventDefault();
 							});
 							$("#wpbody-content").prepend($("<div />", {
