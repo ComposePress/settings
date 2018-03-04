@@ -156,7 +156,7 @@ abstract class Page extends Component {
 							else {
 								$('.nav-tab-wrapper a:first').addClass('nav-tab-active');
 							}
-													$(document).trigger('tab_changed', $($('.nav-tab-active').attr('href')).attr('id'));
+							$(document).trigger('tab_changed', $($('.nav-tab-active').attr('href')).attr('id'));
 							$('.nav-tab-wrapper a').click(function (evt) {
 								$('.nav-tab-wrapper a').removeClass('nav-tab-active');
 								$(this).addClass('nav-tab-active').blur();
@@ -171,7 +171,7 @@ abstract class Page extends Component {
 								} else {
 									location.hash = $(this).attr('href');
 								}
-															$(document).trigger('tab_changed', $(clicked_group).attr('id'));
+								$(document).trigger('tab_changed', $(clicked_group).attr('id'));
 								evt.preventDefault();
 							});
 							$("#wpbody-content").prepend($("<div />", {
@@ -183,19 +183,19 @@ abstract class Page extends Component {
 								$('form tr').filter(function () {
 									return $(this).css('display') !== 'none';
 								}).find('input:not([type=checkbox]):not([type=radio]),input:checked, select, textarea').serializeArray().map(function (x) {
-																	var name = x.name;
-																	var value = x.value;
-																	if (name.endsWith('[]')) {
-																		name = name.replace('[]', '');
-																	}
-																	if (data[ name ]) {
-																		if (!$.isArray(data[ name ])) {
-																			data[ name ] = [ data[ name ] ];
-																		}
-																		data[ name ].push(value);
-																		return true;
+									var name = x.name;
+									var value = x.value;
+									if (name.endsWith('[]')) {
+										name = name.replace('[]', '');
 									}
-																	data[ name ] = value;
+									if (data[ name ]) {
+										if (!$.isArray(data[ name ])) {
+											data[ name ] = [ data[ name ] ];
+										}
+										data[ name ].push(value);
+										return true;
+									}
+									data[ name ] = value;
 								});
 								data[ "_wpnonce" ] = <?php echo wp_json_encode( wp_create_nonce( $this->plugin->slug . '_save-settings' ) ) ?>;
 								data[ "action" ] = <?php echo wp_json_encode( "update_{$this->plugin->safe_slug}_settings" ) ?>;
@@ -225,7 +225,7 @@ abstract class Page extends Component {
 									$(".notifications").children().fadeIn()
 									$(document).trigger("wp-updates-notice-added");
 								});
-														}).on("change", "input, textarea, select", function () {
+							}).on("change", "input, textarea, select", function () {
 								unsaved = true;
 							})
 							$(window).on("beforeunload", function () {
